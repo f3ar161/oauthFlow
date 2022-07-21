@@ -11,7 +11,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 
 APP_KEY = 'RGAPI-e328d0b8-3449-4727-960b-6848863a00bf' 
-APP_BASE_URL = 'http://local.exampleapp.com:3000'
+APP_BASE_URL = 'http://local.testingapp.com:5000'
 APP_CALLBACK_PATH = "/oauth-callback"
 
 product_name = 'test-api-calls'
@@ -120,6 +120,6 @@ def test():
        
 
 if __name__ == "__main__" :
-    app.run(port= 3000, debug=True)
+    app.run(port= 5000, debug=True)
 
 
