@@ -35,7 +35,7 @@ To use oauth2 authentication redirect flows is needed to match your app hostname
 Open hosts file `C:\Windows\System32\Drivers\etc\hosts` \
 Add your hostname to localhost ip
 ```
-127.0.0.1  local.exampleapp.com
+127.0.0.1  YOUR-REDIRECT-URI
 ```
 
 ### MacOS and Linux
