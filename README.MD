@@ -50,17 +50,11 @@ Add your hostname to localhost ip
 For this example we will authenticate through RSO (Riot SSO) and request account data by using oauth2 access token.
 
 1. Open the example app with the [host you defined](#add-rule-for-localhost-domain-only-for-oauth2-authentication)
-2. Follow the `Sign In` link
-
-![App Home with signin link](./docs/img/app-home.png "App Home with signin link")
+2. Follow the `Auth` link
 
 You will be redirected to Riot SSO Login Page. Authenticate using your account credentials.
 
-![Riot Login Page](./docs/img/rso-form.png "Riot Login Page")
-
-After login you will be redirected to local app. Click `My Account`. The app will request [/riot/account/v1/accounts/me](https://developer.riotgames.com/apis#account-v1/GET_getByAccessToken) using an access token of your account.
-
-![App Home Signed](./docs/img/app-home-signed.png "App Home Signed")
+After login you will be redirected to local app. Click `Main menu`. The app will request [/riot/account/v1/accounts/me](https://developer.riotgames.com/apis#account-v1/GET_getByAccessToken) using an access token of your account.
 
 When following `My Account` you receive a response with the same structure of this example:
 
