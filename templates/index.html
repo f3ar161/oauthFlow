@@ -6,37 +6,24 @@
 
 {% block body %}
 <div class="content">
-    <h1 style="text-align: center;">Task Master</h1>
+    <h1 style="text-align: center;">Auth</h1>
 
     <table>
         <tr>
-            <th>Task</th>
-            <th>Added</th>
-            <th>Actions</th>
+            <th>Info</th>
+            <th>Url</th>
+            <th>Logout</th>
         </tr>
-        {% for task in tasks %}
             <tr>
+                <td>Testing Auth</td>
                 <td>
-                    <a href="{{task.sing_url}}">Auth</a></td>
-                <td>{{task.date_created}}</td>
+                    <a href="{{AUTH_URL}}" target="_blank">Auth</a>
+                </td>
                 <td>
-                    <a href="/delete/{{task.id}}">Delete</a>
-                    <br>
-                    <a href="/update/{{task.id}}">Update</a>
-
-
+                    <a id="showBtn" href="{{LOGOUT_URL}}" target="_blank">Logout</a>
                 </td>
             </tr>
-        {% endfor %}
     </table>
-
-    
-    <!--<form action="/" method="post">
-        <input type="text" name="content">
-        <input type="submit" value="add task">
-    </form>
-    !-->
     
 </div>
 {% endblock %}
-

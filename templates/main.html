@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Task Master</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center;">Main menu</h1>
+
+    <table>
+        <tr>
+            <th>Info</th>
+            <th>Url</th>
+        </tr>
+            <tr>
+                <td>
+
+                    <form action="/account" method="post">
+                        <input type="submit" value="Account info">
+                    </form>
+                </td>
+            </tr>
+    </table>
+
+    <p>{{ACCOUNT_INFO}}</p>
+    
+</div>
+{% endblock %}
+
+
