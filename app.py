@@ -13,8 +13,9 @@ app = Flask(__name__)
 AUTHORIZE_URL = os.getenv("RSO_BASE_URI") + "/authorize"
 TOKEN_URL = os.getenv("RSO_BASE_URI") + "/token"
 LOGOUT_URL = os.getenv("RSO_BASE_URI") + "/logout"
-APP_CALLBACK_URL = os.getenv("APP_BASE_URL") + os.getenv("APP_CALLBACK_PATH")
+APP_CALLBACK_URL = os.getenv("APP_BASE_URL") +":"+ os.getenv("PORT") + os.getenv("APP_CALLBACK_PATH")
 RSO_CLIENT_ID = os.getenv("RSO_CLIENT_ID")
+
 
 @app.route('/', methods=['POST','GET'])
 def index(): 
@@ -51,13 +52,10 @@ def account():
 
     if request.method == 'POST':
         requestURL = "https://" + os.getenv('REGION') + ".api.riotgames.com/riot/account/v1/accounts/me"
-        header = {'Authorization': 'Bearer ' + os.getenv('TOKEN')}
+        header = {"Authorization": 'Bearer ' + os.getenv('TOKEN')}
 
         try:
             response = requests.get(requestURL, headers=header)
-
-            print("response printed --------------->>>", response.json())
-            print("response printed --------------->>>", response.json().get('status')["message"])
 
             if response.json().get('status')["status_code"] != 200: 
                 return render_template('main.html', ACCOUNT_INFO = response.json().get('status')["message"])
