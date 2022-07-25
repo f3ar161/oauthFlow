@@ -50,6 +50,8 @@ def aouthCallback():
 @app.route('/account', methods=['POST','GET'])
 def account():
 
+    print("test token ----->>>>",os.getenv('TOKEN'))
+
     if request.method == 'POST':
         requestURL = "https://" + os.getenv('REGION') + ".api.riotgames.com/riot/account/v1/accounts/me"
         header = {"Authorization": 'Bearer ' + os.getenv('TOKEN')}
@@ -57,15 +59,17 @@ def account():
         try:
             response = requests.get(requestURL, headers=header)
 
-            if response.json().get('status')["status_code"] != 200: 
+            if response.status_code != 200: 
                 return render_template('main.html', ACCOUNT_INFO = response.json().get('status')["message"])
 
+            
             return render_template('main.html', ACCOUNT_INFO = response.json())
         except:
-            return render_template('main.html', ACCOUNT_INFO = "Error getting account info")
+
+            return render_template('main.html', ACCOUNT_INFO = "Error getting account info ")
    
 
 if __name__ == "__main__" :
-    app.run(os.getenv("PORT"), debug=True)
+    app.run(port=os.getenv("PORT"), debug=True)
 
 
