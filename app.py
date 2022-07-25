@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, request, jsonify
 from dotenv import load_dotenv
 
 #models
-from internal.domain.entities import models
+from Infrastructure.domain.entities import models
 
 import os
 import requests
