@@ -5,7 +5,16 @@ This project is a consumption example of [Riot Games Developer API](https://deve
 # Project Setup
 To setup this project locally a few steps are needed, they are:
 - [Configure environment variables](#configure-environment-variables)
-- [Add rule for localhost domain (only for oauth2 authentication)](#add-rule-for-localhost-domain-only-for-oauth2-authentication)
+- [Add rule for localhost domain (only for oauth2 authentication)]
+(#add-rule-for-localhost-domain-only-for-oauth2-authentication)
+- [Install python dependencies](#install-python-dependecies)
+
+## Install python dependencies
+You should install some dependencies to use the app: 
+    - pip install Flask
+    - pip install python-dotenv
+    - pip install dataclasses
+    - pip install numpy
 
 ## Configure environment variables
 ### API Key
@@ -43,6 +52,57 @@ Open hosts file: `sudo nano /etc/hosts` \
 Add your hostname to localhost ip
 ```
 127.0.0.1  YOUR-REDIRECT-URI
+```
+
+
+### Consuming the APP
+After [booting server] make a request `GET localhost:5000/summoners/overview?region={summonerRegion}&name={summonerName}`
+
+Available regions are:
+- BR1
+- EUN1
+- EUW1
+- JP1
+- KR
+- LA1
+- LA2
+- NA1
+- OC1
+- RU
+- TR1
+
+#### Using curl
+```bash
+curl -X GET "localhost:5000/summoners/overview?region={region}&name={summonerName}"
+```
+
+#### Using browser
+Navigate to `localhost:5000/summoners/overview?region={region}&name={summonerName}`
+
+#### Example response
+```json
+{
+    "id": "summonerID",
+    "name": "SummonerName",
+    "profileIconId": 1,
+    "summonerLevel": 10,
+    "revisionDate": "2022-01-17T18:14:50-03:00",
+    "leagueEntries": [
+        {
+            "leagueId": "leagueID",
+            "queueType": "RANKED_SOLO_5x5",
+            "tier": "CHALLENGER",
+            "rank": "I",
+            "leaguePoints": 1071,
+            "wins": 194,
+            "losses": 164,
+            "hotStreak": true,
+            "veteran": true,
+            "freshBlood": false,
+            "inactive": false
+        }
+    ]
+}
 ```
 
 

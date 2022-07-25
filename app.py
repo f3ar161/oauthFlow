@@ -1,8 +1,6 @@
-from contextlib import redirect_stderr
 from datetime import datetime
-from flask import Flask, redirect, render_template, request, url_for, request, jsonify
+from flask import Flask, render_template, request, request, jsonify
 from dotenv import load_dotenv
-from datetime import datetime
 
 #models
 from internal.domain.entities import models
@@ -20,8 +18,11 @@ LOGOUT_URL = os.getenv("RSO_BASE_URI") + "/logout"
 APP_CALLBACK_URL = os.getenv("APP_BASE_URL") +":"+ os.getenv("PORT") + os.getenv("APP_CALLBACK_PATH")
 RSO_CLIENT_ID = os.getenv("RSO_CLIENT_ID")
 AUTH_URL=AUTHORIZE_URL + "?redirect_uri=" + APP_CALLBACK_URL + "&client_id=" + RSO_CLIENT_ID + "&response_type=code" + "&scope=openid"
+token = ""
 
-
+def set_token(value: str):
+    global token
+    token = value
 
 @app.route('/', methods=['POST','GET'])
 def index(): 
@@ -47,7 +48,7 @@ def aouthCallback():
             headers={"Content-Type":"application/x-www-form-urlencoded"},
             )
 
-        os.environ["TOKEN"] = r.json().get('access_token')
+        set_token(r.json().get('access_token'))
 
         return render_template('main.html', account={})   
     except:
@@ -59,7 +60,7 @@ def account():
 
     if request.method == 'POST':
         requestURL = "https://" + os.getenv('REGION') + ".api.riotgames.com/riot/account/v1/accounts/me"
-        header = {"Authorization": 'Bearer ' + os.getenv('TOKEN')}
+        header = {"Authorization": 'Bearer ' + token}
 
         try:
             response = requests.get(requestURL, headers=header)
@@ -78,10 +79,10 @@ def account():
 def accountMe():
 
     ## validate token 
-    if os.getenv('TOKEN') != "": 
+    if token != "": 
 
         requestURL = "https://" + os.getenv('REGION') + ".api.riotgames.com/riot/account/v1/accounts/me"
-        header = {"Authorization": 'Bearer ' + os.getenv('TOKEN')}
+        header = {"Authorization": 'Bearer ' + token}
 
         try:
             response = requests.get(requestURL, headers=header)
@@ -104,7 +105,7 @@ def summonersOverview():
     name  = request.args.get('name', None)
 
     ## validate token 
-    if os.getenv('TOKEN') != "": 
+    if token != "": 
 
         requestSummonerURL = "https://" + region + ".api.riotgames.com/lol/summoner/v4/summoners/by-name/" + name
         requestSummonerInfoURL = "https://" + region + ".api.riotgames.com/lol/league/v4/entries/by-summoner/"
