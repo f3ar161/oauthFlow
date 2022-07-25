@@ -7,14 +7,14 @@ To setup this project locally a few steps are needed, they are:
 - [Configure environment variables](#configure-environment-variables)
 - [Add rule for localhost domain (only for oauth2 authentication)]
 (#add-rule-for-localhost-domain-only-for-oauth2-authentication)
-- [Install python dependencies](#install-python-dependecies)
+- [Install python dependencies](#install-python-dependencies)
 
 ## Install python dependencies
 You should install some dependencies to use the app: 
-    - pip install Flask
-    - pip install python-dotenv
-    - pip install dataclasses
-    - pip install numpy
+- pip install Flask
+- pip install python-dotenv
+- pip install dataclasses
+- pip install numpy
 
 ## Configure environment variables
 ### API Key
