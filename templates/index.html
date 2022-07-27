@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>RGAPI EXAMPLE APP</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center;">Auth</h1>
+
+    <table>
+        <tr>
+            <th>Info</th>
+            <th>Url</th>
+            <th>Logout</th>
+        </tr>
+            <tr>
+                <td>Testing Auth</td>
+                <td>
+                    <a href="{{AUTH_URL}}" target="_blank">Auth</a>
+                </td>
+                <td>
+                    <a id="showBtn" href="{{LOGOUT_URL}}" target="_blank">Logout</a>
+                </td>
+            </tr>
+    </table>
+    
+</div>
+{% endblock %}
