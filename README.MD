@@ -15,6 +15,7 @@ You should install some dependencies to use the app:
 - pip install python-dotenv
 - pip install dataclasses
 - pip install numpy
+- pip install Flask-Session
 
 ## Configure environment variables
 ### API Key
@@ -44,14 +45,14 @@ To use oauth2 authentication redirect flows is needed to match your app hostname
 Open hosts file `C:\Windows\System32\Drivers\etc\hosts` \
 Add your hostname to localhost ip
 ```
-127.0.0.1  YOUR-REDIRECT-URI
+127.0.0.1  local.testingapp.com
 ```
 
 ### MacOS and Linux
 Open hosts file: `sudo nano /etc/hosts` \
 Add your hostname to localhost ip
 ```
-127.0.0.1  YOUR-REDIRECT-URI
+127.0.0.1  local.testingapp.com
 ```
 
 
