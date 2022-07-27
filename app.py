@@ -49,7 +49,7 @@ def aouthCallback():
 
         return render_template("main.html", account={})   
     except Exception as e:
-        print(f"Error token not generated {e}")
+        print(f"Token not generated: {e}")
 
         return render_template("index.html", AUTH_URL=AUTH_URL, LOGOUT_URL=LOGOUT_URL)   
 
@@ -71,8 +71,8 @@ def account():
 
             
             return render_template("main.html", ACCOUNT_INFO=response.json())
-        except:
-
+        except Exception as e:
+            print(f"Accounts requests failed: {e}")
             return render_template("main.html", ACCOUNT_INFO="Error getting account info ")
 
 @app.route("/accounts/me", methods=["GET"])
@@ -92,11 +92,11 @@ def accountMe():
 
         return response.json(), 200  
     except Exception as e:
-            print(e)
+            print(f"Accounts requests failed: {e}")
             return jsonify("Internal Server Error"), 500  
 
 @app.route("/summoners/overview", methods=["GET"])
-def summonersOverview():
+def summonerName():
 
     region  = request.args.get("region", None)
     name  = request.args.get("name", None)
@@ -104,12 +104,12 @@ def summonersOverview():
     if not os.getenv("APP_KEY"): 
         return jsonify("Unauthorized"), 401   
 
-    requestSummonerURL = f"https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{name}"
-    requestSummonerInfoURL = f"https://{region}.api.riotgames.com/lol/league/v4/entries/by-summoner/"
+    requestSummonerName = f"https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{name}"
+    requestSummonerByID = f"https://{region}.api.riotgames.com/lol/league/v4/entries/by-summoner/"
     header = {"X-Riot-Token": os.getenv("APP_KEY")}
 
     try:
-        response = requests.get(requestSummonerURL,headers=header)
+        response = requests.get(requestSummonerName,headers=header)
             
         summoner = models.Summoner(
             response.json().get("id"),
@@ -120,14 +120,14 @@ def summonersOverview():
             []
             )
 
-        requestSummonerInfoURL += summoner.id
-        responseEntries = requests.get(requestSummonerInfoURL,headers=header)
+        requestSummonerByID += summoner.id
+        responseEntries = requests.get(requestSummonerByID,headers=header)
 
         summoner.leagueEntries = responseEntries.json()
 
         return json.dumps(vars(summoner),indent=0, sort_keys=True, default=str), 200  
     except Exception as e:
-        print(e)
+        print(f"Summoners requests failed: {e}")
         return jsonify("Internal Server Error"), 500  
 
 if __name__ == "__main__" :
