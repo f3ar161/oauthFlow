@@ -102,7 +102,7 @@ def summonersOverview():
     name  = request.args.get("name", None)
 
     if not os.getenv("APP_KEY"): 
-        return jsonify("Internal Server Error"), 500   
+        return jsonify("Unauthorized"), 401   
 
     requestSummonerURL = f"https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{name}"
     requestSummonerInfoURL = f"https://{region}.api.riotgames.com/lol/league/v4/entries/by-summoner/"
